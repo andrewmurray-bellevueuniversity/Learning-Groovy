@@ -1,6 +1,6 @@
-import groovy.transform.ToString
+import groovy.transform.Canonical
 
-@ToString
+@Canonical
 class Person {
     String firstName
     String lastName

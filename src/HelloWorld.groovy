@@ -1,32 +1,34 @@
 class HelloWorld {
     static void main(String[] args) {
-        Person johnDoe = new Person()
-        johnDoe.setFirstName("John")
-        johnDoe.setLastName("Doe")
-        johnDoe.setAge(40)
+        Person johnDoe = new Person("John", "Doe", 40)
+        Person maryHill = new Person("Mary", "Hill", 30)
+        Person thomasMarks = new Person("Thomas", "Marks", 21)
 
-        // Create Closure that prints String representation of a person
-//		Closure personToString = { println johnDoe.toString() }
-//		personToString()
-        Closure personToString = { Person person ->
-            println person.toString()
-        }
+        // Create a new list of persons
+		def allPersons = [johnDoe, maryHill, thomasMarks]
 
-        // Create Closure that prints full name of a person
-        Closure personFullName = { Person person ->
-            println person.firstName + " " + person.lastName
-        }
+        // Querying Collections
+		assert allPersons instanceof List
+		assert allPersons.size() == 3
+		assert allPersons[2] == thomasMarks
 
-        // Pass Closure to a method and execute it
-        handlePerson(personToString, johnDoe)
-        handlePerson(personFullName, johnDoe)
-    }
+        // Iterate over elements
+		allPersons.each {
+			println it
+		}
 
-    static void handlePerson(Closure c, Person p) {
-        if (p == null) {
-            throw new RuntimeException("A person instance cannot be null")
-        }
+        // Iterate over elements and using an index
+		allPersons.eachWithIndex { Person entry, int i ->
+			println i + ": " + entry
+		}
 
-        c(p)
+        // Filtering a specific element
+		allPersons.find { it.lastName == 'Hill' } == maryHill
+
+        // Transforming elements into something else
+		allPersons.collect { it.age <= 30 } == [false, true, true]
+
+        // Sorting elements based on a criterion
+		allPersons.sort { it.age } == [thomasMarks, maryHill, johnDoe]
     }
 }
