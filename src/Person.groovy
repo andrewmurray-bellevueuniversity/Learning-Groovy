@@ -1,7 +1,6 @@
-import groovy.transform.Canonical
+import groovy.transform.ToString
 
-// Declare convenience annotations on class-level
-@Canonical
+@ToString
 class Person {
     String firstName
     String lastName
