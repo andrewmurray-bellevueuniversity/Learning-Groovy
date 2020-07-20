@@ -1,7 +1,7 @@
 import groovy.transform.Canonical
 
 @Canonical
-class Person {
+class Person implements Serializable {
     String firstName
     String lastName
     int age
