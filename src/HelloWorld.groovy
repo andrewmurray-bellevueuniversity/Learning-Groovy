@@ -1,34 +1,25 @@
 class HelloWorld {
     static void main(String[] args) {
-        Person johnDoe = new Person("John", "Doe", 40)
-        Person maryHill = new Person("Mary", "Hill", 30)
-        Person thomasMarks = new Person("Thomas", "Marks", 21)
+        Person johnDoe = new Person()
 
-        // Create a new list of persons
-		def allPersons = [johnDoe, maryHill, thomasMarks]
+        // Read full contents of file
+        File file = new File("resources/john-doe.txt")
+        String content = file.getText('UTF-8')
+        println content
 
-        // Querying Collections
-		assert allPersons instanceof List
-		assert allPersons.size() == 3
-		assert allPersons[2] == thomasMarks
+        // Iterate over each line of file
+        file.eachLine { line, no ->
+            if (no == 1) {
+                johnDoe.setFirstName(line)
+            } else if (no == 2) {
+                johnDoe.setLastName(line)
+            } else if (no == 3) {
+                johnDoe.setAge(line.toInteger())
+            } else {
+                throw new RuntimeException("A person text file should only have 3 lines")
+            }
+        }
 
-        // Iterate over elements
-		allPersons.each {
-			println it
-		}
-
-        // Iterate over elements and using an index
-		allPersons.eachWithIndex { Person entry, int i ->
-			println i + ": " + entry
-		}
-
-        // Filtering a specific element
-		allPersons.find { it.lastName == 'Hill' } == maryHill
-
-        // Transforming elements into something else
-		allPersons.collect { it.age <= 30 } == [false, true, true]
-
-        // Sorting elements based on a criterion
-		allPersons.sort { it.age } == [thomasMarks, maryHill, johnDoe]
+        println johnDoe
     }
 }
