@@ -1,25 +1,18 @@
 class HelloWorld {
-	static void main(String[] args) {
-		Person johnDoe = new Person()
-		johnDoe.setFirstName("John")
-		johnDoe.setLastName("Doe")
-		johnDoe.setAge(40)
-		println johnDoe.getFullName()
-		println johnDoe.getAge()
+    static void main(String[] args) {
+        Person johnDoe = new Person()
+        johnDoe.setFirstName("John")
+        johnDoe.setLastName("Doe")
+        johnDoe.setAge(40)
 
-		// Identify if Person is middle-aged using a conditional
-		if (johnDoe.getAge() >= 45 && johnDoe.getAge() <= 65) {
-			println johnDoe.getFullName() + " is a middle-aged person"
-		} else {
-			println johnDoe.getFullName() + " is " + johnDoe.getAge() + " years old"
-		}
-
-		// Define a list of Persons
-		def persons = [johnDoe, new Person(firstName: "Mary", lastName: "Hill")]
-
-		 // Iterate over Person instances in list
-		for (Person p : persons) {
-			println "Person: " + p.getFullName()
-		}
-	}
+        // Catch unchecked exception
+        try {
+            // Convert a String into a Long data type
+            johnDoe.getFirstName().toLong()
+        } catch (NumberFormatException e) {
+            // Handle unchecked exception by printing a message
+            assert e instanceof NumberFormatException
+            println "Cannot convert a String into a Long"
+        }
+    }
 }
