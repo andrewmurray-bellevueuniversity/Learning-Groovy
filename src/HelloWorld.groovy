@@ -1,24 +1,13 @@
-
 class HelloWorld {
-	static void main(String[] args) {
-		println "Hello World"
-		
-		// Define a typed variable
-		int age = 40
-		
-		// Print variable value
-		println age
-		
-		// Print variable type
-		println age.getClass()
-		
-		// Define a variable with dynamic typing
-		def name = "John"
-		
-		// Print variable value
-		println name
-		
-		// Print variable type
-		println name.getClass()
-	}
+    static void main(String[] args) {
+        // Create new Person class and instantiate it
+        Person person = new Person()
+        person.setFirstName("John")
+        person.setLastName("Doe")
+        person.setAge(40)
+
+        // Print the full name and age of Person instance
+        println person.getFullName()
+        println person.getAge()
+    }
 }
